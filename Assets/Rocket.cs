@@ -19,6 +19,10 @@ public class Rocket : MonoBehaviour
     float rcsThrust = 250f;
     [SerializeField]
     float mainThrust = 30f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] AudioClip deadSound;
+    [SerializeField] AudioClip winSound;
+
     bool isRocketSoundOn = false;
 
     enum State
@@ -42,8 +46,8 @@ public class Rocket : MonoBehaviour
     {
         if (state == State.Alive)
         {
-            Thrust();
-            Rotate();
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
     }
 
@@ -61,11 +65,13 @@ public class Rocket : MonoBehaviour
                 break;
             case "Finish":
                 state = State.Transcending;
+                rocketSound.PlayOneShot(winSound);
                 level++;
                 Invoke("LoadNextLevel", 1f);
                 break;
             default:
                 state = State.Dead;
+                rocketSound.PlayOneShot(deadSound);
                 Invoke("LoadFirstLevel", 1f);
                 break;
         }
@@ -82,16 +88,11 @@ public class Rocket : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rigidbody.AddRelativeForce(Vector3.up * mainThrust);
-            if (!rocketSound.isPlaying)
-            {
-                rocketSound.Play();
-            }
-            // print("Thrusting");
+            ApplyThrust();
         }
         else
         {
@@ -100,7 +101,18 @@ public class Rocket : MonoBehaviour
 
     }
 
-    private void Rotate()
+    private void ApplyThrust()
+    {
+        rigidbody.AddRelativeForce(Vector3.up * mainThrust);
+        if (!rocketSound.isPlaying)
+        {
+            //rocketSound.Play();
+            rocketSound.PlayOneShot(mainEngine);
+        }
+        // print("Thrusting");
+    }
+
+    private void RespondToRotateInput()
     {
         rigidbody.freezeRotation = true;    // take manual control of rotation
 
