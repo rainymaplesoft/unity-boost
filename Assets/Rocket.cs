@@ -15,13 +15,15 @@ public class Rocket : MonoBehaviour
         public              Yes                     Yes
     */
 
-    [SerializeField]
-    float rcsThrust = 250f;
-    [SerializeField]
-    float mainThrust = 30f;
+    [SerializeField] float rcsThrust = 100f;
+    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deadSound;
     [SerializeField] AudioClip winSound;
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem winParticles;
+    [SerializeField] ParticleSystem deadParticles;
 
     bool isRocketSoundOn = false;
 
@@ -64,17 +66,31 @@ public class Rocket : MonoBehaviour
             case "fuel":
                 break;
             case "Finish":
-                state = State.Transcending;
-                rocketSound.PlayOneShot(winSound);
-                level++;
-                Invoke("LoadNextLevel", 1f);
+                StartSuccessSequence();
                 break;
             default:
-                state = State.Dead;
-                rocketSound.PlayOneShot(deadSound);
-                Invoke("LoadFirstLevel", 1f);
+                StartDeadSequence();
                 break;
         }
+    }
+
+    private void StartDeadSequence()
+    {
+        state = State.Dead;
+        rocketSound.Stop();
+        rocketSound.PlayOneShot(deadSound);
+        deadParticles.Play();
+        Invoke("LoadFirstLevel", levelLoadDelay);
+    }
+
+    private void StartSuccessSequence()
+    {
+        state = State.Transcending;
+        rocketSound.Stop();
+        rocketSound.PlayOneShot(winSound);
+        winParticles.Play();
+        level++;
+        Invoke("LoadNextLevel", levelLoadDelay);
     }
 
     private void LoadNextLevel()
@@ -97,17 +113,19 @@ public class Rocket : MonoBehaviour
         else
         {
             rocketSound.Stop();
+            mainEngineParticles.Stop();
         }
 
     }
 
     private void ApplyThrust()
     {
-        rigidbody.AddRelativeForce(Vector3.up * mainThrust);
+        rigidbody.AddRelativeForce(Vector3.up * mainThrust); //* Time.deltaTime
         if (!rocketSound.isPlaying)
         {
             //rocketSound.Play();
             rocketSound.PlayOneShot(mainEngine);
+            mainEngineParticles.Play();
         }
         // print("Thrusting");
     }
