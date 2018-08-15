@@ -429,17 +429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4382360451616984, guid: 664fd2204fcc7e44798046b7564a3859, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114571346399889694, guid: 664fd2204fcc7e44798046b7564a3859,
-        type: 2}
-      propertyPath: rcsThrust
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 114571346399889694, guid: 664fd2204fcc7e44798046b7564a3859,
-        type: 2}
-      propertyPath: mainThrust
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 664fd2204fcc7e44798046b7564a3859, type: 2}
@@ -481,7 +471,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4990467481704306, guid: 8355ce2467449874dbe10959a7e87c1d, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4990467481704306, guid: 8355ce2467449874dbe10959a7e87c1d, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -978,7 +968,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4752544196958678, guid: 5993f7eb14410e2479693523108173fc, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4752544196958678, guid: 5993f7eb14410e2479693523108173fc, type: 2}
       propertyPath: m_LocalScale.y
@@ -1071,7 +1061,7 @@ Transform:
   - {fileID: 445649379}
   - {fileID: 773819454}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1459232562
 Prefab:
@@ -1254,7 +1244,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4475981101599858, guid: 02677bec83ed21549bf7b01bd91bab53, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1146732095207856, guid: 02677bec83ed21549bf7b01bd91bab53, type: 2}
       propertyPath: m_TagString
